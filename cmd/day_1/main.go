@@ -49,11 +49,10 @@ func main() {
 		sum += v
 	}
 
-	end := time.Now()
-
 	fmt.Printf("Biggest inventory is: %d\n", sorted[len(sorted)-1])
 	fmt.Printf("Sum of the three biggest inventories is: %d\n", sum)
 
+	end := time.Now()
 	duration := end.Sub(start) / time.Microsecond
 
 	fmt.Printf("Run took %d microseconds\n", duration)
