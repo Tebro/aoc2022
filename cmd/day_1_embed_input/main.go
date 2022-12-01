@@ -6,15 +6,12 @@ import (
 	"sort"
 	"strconv"
 	"strings"
-	"time"
 )
 
 //go:embed input.txt
 var data string
 
 func main() {
-
-	start := time.Now()
 
 	inventories := []int{0}
 
@@ -43,10 +40,5 @@ func main() {
 
 	fmt.Printf("Biggest inventory is: %d\n", sorted[len(sorted)-1])
 	fmt.Printf("Sum of the three biggest inventories is: %d\n", sum)
-
-	end := time.Now()
-	duration := end.Sub(start) / time.Microsecond
-
-	fmt.Printf("Run took %d microseconds\n", duration)
 
 }
