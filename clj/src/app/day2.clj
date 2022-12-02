@@ -30,7 +30,7 @@
      "C Y" (+ scissor draw)}))
 
 (defn alg [rules lines]
-  (let [line-scores (map #(rules %) lines)]
+  (let [line-scores (map rules lines)]
     (reduce + line-scores)))
 
 (comment
