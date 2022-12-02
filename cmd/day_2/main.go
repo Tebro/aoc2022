@@ -1,53 +1,36 @@
 package main
 
-import (
-	"strings"
-)
-
 const loss, draw, win = 0, 3, 6
 const rock, paper, scissor = 1, 2, 3
 
-var results1 = map[string]map[string]int{
-	"A": {
-		"X": rock + draw,
-		"Y": paper + win,
-		"Z": scissor + loss,
-	},
-	"B": {
-		"X": rock + loss,
-		"Y": paper + draw,
-		"Z": scissor + win,
-	},
-	"C": {
-		"X": rock + win,
-		"Y": paper + loss,
-		"Z": scissor + draw,
-	},
+var results1 = map[string]int{
+	"A X": rock + draw,
+	"A Y": paper + win,
+	"A Z": scissor + loss,
+	"B X": rock + loss,
+	"B Y": paper + draw,
+	"B Z": scissor + win,
+	"C X": rock + win,
+	"C Y": paper + loss,
+	"C Z": scissor + draw,
 }
 
-var results2 = map[string]map[string]int{
-	"A": {
-		"Y": rock + draw,
-		"Z": paper + win,
-		"X": scissor + loss,
-	},
-	"B": {
-		"X": rock + loss,
-		"Y": paper + draw,
-		"Z": scissor + win,
-	},
-	"C": {
-		"Z": rock + win,
-		"X": paper + loss,
-		"Y": scissor + draw,
-	},
+var results2 = map[string]int{
+	"A Y": rock + draw,
+	"A Z": paper + win,
+	"A X": scissor + loss,
+	"B X": rock + loss,
+	"B Y": paper + draw,
+	"B Z": scissor + win,
+	"C Z": rock + win,
+	"C X": paper + loss,
+	"C Y": scissor + draw,
 }
 
-func alg(lines []string, rules map[string]map[string]int) int {
+func alg(lines []string, rules map[string]int) int {
 	total := 0
 	for _, line := range lines {
-		parts := strings.Split(line, " ")
-		total += rules[parts[0]][parts[1]]
+		total += rules[line]
 	}
 	return total
 }
