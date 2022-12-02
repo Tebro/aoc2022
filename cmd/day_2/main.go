@@ -1,13 +1,8 @@
 package main
 
 import (
-	"bufio"
-	"fmt"
-	"os"
 	"strings"
 )
-
-var inputFileName = "input/day_2"
 
 const loss, draw, win = 0, 3, 6
 const rock, paper, scissor = 1, 2, 3
@@ -48,32 +43,19 @@ var results2 = map[string]map[string]int{
 	},
 }
 
-func main() {
-
-	f, err := os.Open(inputFileName)
-	if err != nil {
-		fmt.Println(err.Error())
-		return
-	}
-	defer f.Close()
-
-	scanner := bufio.NewScanner(f)
-	scanner.Split(bufio.ScanLines)
-
-	total1 := 0
-	total2 := 0
-
-	for scanner.Scan() {
-		line := scanner.Text()
+func alg(lines []string, rules map[string]map[string]int) int {
+	total := 0
+	for _, line := range lines {
 		parts := strings.Split(line, " ")
-
-		score1 := results1[parts[0]][parts[1]]
-		score2 := results2[parts[0]][parts[1]]
-
-		total1 += score1
-		total2 += score2
+		total += rules[parts[0]][parts[1]]
 	}
+	return total
+}
 
-	fmt.Println("Part 1 score is:", total1)
-	fmt.Println("Part 2 score is:", total2)
+func part1(lines []string) int {
+	return alg(lines, results1)
+}
+
+func part2(lines []string) int {
+	return alg(lines, results2)
 }

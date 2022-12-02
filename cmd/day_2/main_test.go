@@ -1,10 +1,28 @@
 package main
 
-import "testing"
+import (
+	_ "embed"
+	"strings"
+	"testing"
+)
 
-func Benchmark_main(b *testing.B) {
-	inputFileName = "../../input/day_2"
+//go:embed input.txt
+var data string
+
+func Benchmark_part1(b *testing.B) {
+	lines := strings.Split(data, "\n")
+
+	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		main()
+		part1(lines)
+	}
+}
+
+func Benchmark_part2(b *testing.B) {
+	lines := strings.Split(data, "\n")
+
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		part2(lines)
 	}
 }
