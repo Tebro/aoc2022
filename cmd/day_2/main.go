@@ -53,20 +53,26 @@ func mapper(lines []string, rules map[string]int, ch chan int) {
 }
 
 func concurrent(lines []string, rules map[string]int) int {
-	halfWay := len(lines) / 2
-	first := lines[:halfWay]
-	second := lines[halfWay:]
+	partSize := len(lines) / 4
+	first := lines[:partSize]
+	second := lines[partSize : partSize*2]
+	third := lines[partSize*2 : partSize*3]
+	fourth := lines[partSize*3:]
 
 	ch1 := make(chan int)
 	ch2 := make(chan int)
+	ch3 := make(chan int)
+	ch4 := make(chan int)
 
 	go mapper(first, rules, ch1)
 	go mapper(second, rules, ch2)
+	go mapper(third, rules, ch3)
+	go mapper(fourth, rules, ch4)
 
 	total := 0
-	var firstDone, secondDone bool
+	var firstDone, secondDone, thirdDone, fourthDone bool
 	for {
-		if firstDone && secondDone {
+		if firstDone && secondDone && thirdDone && fourthDone {
 			break
 		}
 		select {
@@ -76,6 +82,12 @@ func concurrent(lines []string, rules map[string]int) int {
 		case v2 := <-ch2:
 			total += v2
 			secondDone = true
+		case v3 := <-ch3:
+			total += v3
+			thirdDone = true
+		case v4 := <-ch4:
+			total += v4
+			fourthDone = true
 		}
 	}
 
