@@ -17,12 +17,31 @@ func Benchmark_part1(b *testing.B) {
 		part1(lines)
 	}
 }
+
+func Benchmark_part1String(b *testing.B) {
+	lines := strings.Split(data, "\n")
+
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		part1String(lines)
+	}
+}
+
 func Benchmark_part2(b *testing.B) {
 	lines := strings.Split(data, "\n")
 
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		part1(lines)
+	}
+}
+
+func Benchmark_part2String(b *testing.B) {
+	lines := strings.Split(data, "\n")
+
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		part2String(lines)
 	}
 }
 

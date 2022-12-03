@@ -1,5 +1,7 @@
 package day3
 
+import "strings"
+
 func characterPrio(c rune) int {
 	if c >= 'a' {
 		return int(c-'a') + 1
@@ -45,6 +47,25 @@ func part1(lines []string) int {
 	return total
 }
 
+func part1String(lines []string) int {
+	total := 0
+	for _, l := range lines {
+		halfWay := len(l) / 2
+		first := l[:halfWay]
+		second := l[halfWay:]
+
+		for _, c := range first {
+			if strings.ContainsRune(second, c) {
+				total += characterPrio(c)
+				break
+			}
+		}
+	}
+
+	return total
+
+}
+
 func part2(lines []string) int {
 	total := 0
 	for i := 0; i < len(lines); i += 3 {
@@ -60,4 +81,22 @@ func part2(lines []string) int {
 		}
 	}
 	return total
+}
+
+func part2String(lines []string) int {
+	total := 0
+	for i := 0; i < len(lines); i += 3 {
+		line1 := lines[i]
+		line2 := lines[i+1]
+		line3 := lines[i+2]
+
+		for _, c := range line1 {
+			if strings.ContainsRune(line2, c) && strings.ContainsRune(line3, c) {
+				total += characterPrio(c)
+				break
+			}
+		}
+	}
+	return total
+
 }
