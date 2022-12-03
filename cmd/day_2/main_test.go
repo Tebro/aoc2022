@@ -26,3 +26,21 @@ func Benchmark_part2(b *testing.B) {
 		part2(lines)
 	}
 }
+
+func Benchmark_part1conc(b *testing.B) {
+	lines := strings.Split(data, "\n")
+
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		part1conc(lines)
+	}
+}
+
+func Benchmark_part2conc(b *testing.B) {
+	lines := strings.Split(data, "\n")
+
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		part2conc(lines)
+	}
+}
